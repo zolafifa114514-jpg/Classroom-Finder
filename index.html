@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Finder</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f7fb;
+      color: #17324d;
+      margin: 0;
+    }
+
+    header {
+      background: #17324d;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px #00000012;
+    }
+
+    input {
+      width: 65%;
+      padding: 13px;
+      border: 2px solid #d5e2ec;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 13px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2878c8;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d5e9d;
+    }
+
+    .quick-buttons {
+      margin-top: 15px;
+    }
+
+    .quick-buttons button {
+      background: #e4f2ff;
+      color: #2878c8;
+      margin: 4px;
+    }
+
+    #result {
+      display: none;
+    }
+
+    #result.show {
+      display: block;
+    }
+
+    li {
+      margin: 14px 0;
+      line-height: 1.5;
+    }
+
+    .tip {
+      background: #fff4cf;
+      padding: 13px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .error {
+      color: #a33b3b;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Classroom Finder</h1>
+    <p>Simple directions for new students</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Where do you need to go?</h2>
+
+      <input
+        id="roomInput"
+        type="text"
+        placeholder="Example: Room 204"
+      >
+
+      <button onclick="findRoom()">Find Room</button>
+
+      <div class="quick-buttons">
+        <button onclick="chooseRoom('204')">Room 204</button>
+        <button onclick="chooseRoom('Science 12')">Science 12</button>
+        <button onclick="chooseRoom('Library')">Library</button>
+      </div>
+
+      <p id="errorMessage" class="error"></p>
+    </section>
+
+    <section id="result" class="card">
+      <h2 id="roomName"></h2>
+      <p id="building"></p>
+
+      <h3>Directions:</h3>
+      <ol id="directions"></ol>
+
+      <div class="tip">
+        <strong>Helpful tip:</strong>
+        Look for the large hallway signs and room numbers on the doors.
+      </div>
+    </section>
+
+    <section class="card">
+      <strong>Privacy</strong>
+      <p>
+        Classroom Finder does not save personal student information.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const rooms = {
+      "204": {
+        name: "Room 204",
+        building: "Main Building - Second Floor",
+        directions: [
+          "Enter through the main doors.",
+          "Walk straight to the blue hallway signs.",
+          "Take the stairs or elevator to the second floor.",
+          "Turn right. Room 204 is the fourth door on your left."
+        ]
+      },
+
+      "science 12": {
+        name: "Science 12",
+        building: "Science Building - First Floor",
+        directions: [
+          "Enter the Science Building.",
+          "Follow the green Science hallway signs.",
+          "Walk past the laboratory doors.",
+          "Science 12 is on your right."
+        ]
+      },
+
+      "library": {
+        name: "Library",
+        building: "Main Building - Ground Floor",
+        directions: [
+          "Enter through the main doors.",
+          "Turn left at the welcome desk.",
+          "Follow the Library signs.",
+          "The Library entrance is at the end of the hallway."
+        ]
+      }
+    };
+
+    function chooseRoom(room) {
+      document.getElementById("roomInput").value = room;
+      findRoom();
+    }
+
+    function findRoom() {
+      const input = document
+        .getElementById("roomInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+      const room = rooms[input];
+      const result = document.getElementById("result");
+      const error = document.getElementById("errorMessage");
+
+      if (!room) {
+        result.classList.remove("show");
+        error.textContent =
+          "Room not found. Please check the room name or ask the school office.";
+        return;
+      }
+
+      error.textContent = "";
+
+      document.getElementById("roomName").textContent = room.name;
+      document.getElementById("building").textContent = room.building;
+
+      const directionsList = document.getElementById("directions");
+      directionsList.innerHTML = "";
+
+      room.directions.forEach(function(step) {
+        const item = document.createElement("li");
+        item.textContent = step;
+        directionsList.appendChild(item);
+      });
+
+      result.classList.add("show");
+    }
+  </script>
+</body>
+</html>
