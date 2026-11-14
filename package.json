@@ -1,0 +1,9 @@
+{
+  "name": "classroom-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A safe, simple classroom wayfinding MVP.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
