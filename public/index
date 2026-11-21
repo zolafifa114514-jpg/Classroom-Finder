@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classroom Finder</title><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/hints.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero"><div class="brand-mark">CF</div><div><p class="eyebrow">First week helper</p><h1>Find your classroom<br><em>without the stress.</em></h1><p class="hero-copy">Simple, step-by-step directions from an official school map—so you can get there on time.</p></div></header>
+    <section class="finder-card" aria-labelledby="finder-title"><div class="card-top"><div><p class="eyebrow">01 · Start here</p><h2 id="finder-title">Where are you going?</h2></div><span class="safe-chip">✓ Official map only</span></div>
+      <form id="finder-form"><label for="room">Room number <span class="hint-wrap"><button class="hint-button" type="button" aria-label="Room number hint" aria-describedby="room-hint">?</button><span id="room-hint" class="hint-tooltip" role="tooltip">Type a room number like 204 or A12.</span></span></label><input id="room" name="room" placeholder="Try 204 or A12" autocomplete="off" required><label for="start">I’m starting at</label><select id="start" name="start" required><option>Main Entrance</option><option>Library Entrance</option><option>North Stairwell</option></select><button id="find-button" type="submit">Find my classroom <span>→</span></button></form><p id="status" class="status" role="status">Choose a room and starting spot.</p>
+    </section>
+    <section class="content-grid"><div><div id="result" class="result-card"><div class="empty-state"><span class="big-arrow">↗</span><h2>Your directions will appear here.</h2><p>Type a room number above to get safe, simple steps.</p></div></div><div class="difference"><span class="ai-badge">Why this helps</span><p>Printed maps show the building. Classroom Finder turns the official map into directions from <strong>where you are standing</strong>.</p></div></div>
+      <aside class="map-card"><div class="card-top"><div><p class="eyebrow">02 · See it</p><h2>School map</h2></div><span class="map-key"><i></i> room</span></div><div id="map" class="map" aria-label="Simple school map"><div class="building"><div class="building-label">BUILDING A</div><div class="floor"><span>F1</span><button type="button" data-room="101">101</button><button type="button" data-room="204">204</button></div><div class="floor"><span>F2</span><button type="button" data-room="305">305</button><span class="hall">stairwell</span></div></div><div class="building green"><div class="building-label">BUILDING B</div><div class="floor"><span>F1</span><button type="button" data-room="A12">A12</button><span class="hall">library</span></div></div></div><p class="map-help">Click a room to fill it in.</p></aside>
+    </section>
+    <footer><span>Classroom Finder · Version 1</span><span>Made for new students</span></footer>
+  </main><script src="/storage.js"></script><script src="/app.js"></script>
+</body></html>
