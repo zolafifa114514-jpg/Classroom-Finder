@@ -2,7 +2,7 @@
 
 ## How to run
 
-1. Put your real `OPENAI_API_KEY` in `.env`.
+1. Put `KEYGEN_URL` and `KEYGEN_TOKEN` in `.env`.
 2. Run `node server.js` (or `npm start`).
 3. Open http://localhost:3000.
 
@@ -20,15 +20,18 @@ AI model: gpt-6-luna
 - Added friendly key/internet error handling.
 - Saves on this computer only for now.
 - Room-number directions checked locally: room 204 returns four official-map steps.
+- Room directions stay visible even when MindDo/OpenAI is unavailable; the page shows the AI error message and the server logs the fix.
 
 ## Vercel setup
 
 - The page stays in `public/` and Vercel serves it as static files.
 - `api/directions.js` is the Vercel server function for the AI request.
 - `lib/ask-ai.js` is the one small AI-request file shared by local Node and Vercel.
-- Vercel reads `OPENAI_API_KEY` only from its Environment Variables settings; `.env` stays local and ignored.
+- The AI key comes from `getKey()` in `lib/get-key.js`; it is requested from MindDo and kept server-side until `expiresAt`.
+- Vercel reads `KEYGEN_URL` and `KEYGEN_TOKEN` only from its Environment Variables settings; `.env` stays local and ignored.
 - `vercel.json` includes `BRIEF.md` and `NOTES.md` in the function so the brief and model setting are available online.
 - No other environment variable is required. If Vercel asks for a framework, choose `Other` and use `public` as the output directory.
+- AI failures return `error.message` to the page and log `error.fix` on the server; invalid OpenAI keys trigger one fresh MindDo lookup, not a retry loop.
 
 ## Maybe Later
 
